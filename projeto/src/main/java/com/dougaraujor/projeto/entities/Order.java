@@ -3,7 +3,8 @@ package com.dougaraujor.projeto.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,11 +22,12 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    private User client;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
+
+    @ManyToOne
+    @JoinColumn(name = "nid_client", nullable = false)
+    private User client;
 
     // Getters & Setters
     public Long getId() {
