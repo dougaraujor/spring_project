@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.dougaraujor.projeto.entities.Category;
 import com.dougaraujor.projeto.entities.Order;
+import com.dougaraujor.projeto.entities.Product;
 import com.dougaraujor.projeto.entities.User;
 import com.dougaraujor.projeto.entities.enums.OrderStatus;
 import com.dougaraujor.projeto.repositories.CategoryRepository;
 import com.dougaraujor.projeto.repositories.OrderRepository;
+import com.dougaraujor.projeto.repositories.ProductRepository;
 import com.dougaraujor.projeto.repositories.UserRepository;
 
 @Configuration
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -46,11 +51,19 @@ public class TestConfig implements CommandLineRunner {
         Category cat1 = new Category(null, "Sache");
         Category cat2 = new Category(null, "Ração");
         Category cat3 = new Category(null, "Catolê");
-
         // Category
+
+        // Product
+        Product prod1 = new Product(null, "Sache Afonser", "Sachezinho trains", 9.00, "");
+        Product prod2 = new Product(null, "Sache Rata", "Sachezinho trains", 3.00, "");
+        Product prod3 = new Product(null, "Catolê Picles", "Catolê especial", 11.00, "");
+        Product prod4 = new Product(null, "Chá Catnip", "Cházinho 4:20", 6.00, "");
+
+        // Product
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        productRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4));
     }
 
 }
