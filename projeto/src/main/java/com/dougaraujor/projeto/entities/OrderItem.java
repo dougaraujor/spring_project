@@ -3,6 +3,7 @@ package com.dougaraujor.projeto.entities;
 import java.io.Serializable;
 
 import com.dougaraujor.projeto.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -14,9 +15,22 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
+
     private Integer quantity;
     private Double price;
+
+    public OrderItem() {
+
+    }
+
+    public OrderItem(Order order, Product product, Integer quantity, Double price) {
+        super();
+        id.setOrder(order);
+        id.setProduct(product);
+        this.quantity = quantity;
+        this.price = price;
+    }
 
     public Integer getQuantity() {
         return quantity;
@@ -34,6 +48,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
@@ -42,24 +57,12 @@ public class OrderItem implements Serializable {
         id.setOrder(order);
     }
 
-    public Product geProduct() {
+    public Product getProduct() {
         return id.getProduct();
     }
 
     public void setProduct(Product product) {
         id.setProduct(product);
-    }
-
-    public OrderItem() {
-
-    }
-
-    public OrderItem(Order order, Product product, Integer quantity, Double price) {
-        super();
-        id.setOrder(order);
-        id.setProduct(product);
-        this.quantity = quantity;
-        this.price = price;
     }
 
     @Override
