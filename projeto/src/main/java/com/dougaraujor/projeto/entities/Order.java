@@ -29,7 +29,7 @@ public class Order implements Serializable {
     private Integer orderStatus;
 
     @ManyToOne
-    @JoinColumn(name = "nid_client")
+    @JoinColumn(name = "id_client")
     private User client;
 
     // Getters & Setters
